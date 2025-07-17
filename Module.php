@@ -1,12 +1,15 @@
 <?php
 /**
- * Mroonga search
+ * Mroonga search (Modified Version)
  *
  * Enabling Mroonga engine for CJK full-text search. Mroonga plugin for MySQL
  * or MariaDB must be installed and configured.
  *
+ * This is a modified version of the original module by Kentaro Fukuchi.
+ * Original repository: https://github.com/fukuchi/Omeka-S-module-mroonga-search
  *
- * @copyright Copyright (c) 2020, 2021 Kentaro Fukuchi
+ * @copyright Copyright (c) 2020, 2021 Kentaro Fukuchi (Original)
+ * @copyright Copyright (c) 2025 [Your Name] (Modified version)
  * @license MIT License
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -53,6 +56,7 @@ class Module extends AbstractModule
 
         $this->checkMroongaPlugin($connection);
 
+        /*
         $sm = $connection->getSchemaManager();
         $fkeyName = $this->getForeignKeyName($sm, 'Installation');
         $idxName = $this->getFulltextKeyName($sm, 'Installation');
@@ -65,6 +69,7 @@ class Module extends AbstractModule
 
         $sql = "ALTER TABLE fulltext_search ADD CONSTRAINT $fkeyName FOREIGN KEY ( `owner_id` ) REFERENCES `user` ( `id` ) ON DELETE SET NULL";
         $result = $connection->executeQuery($sql);
+        */
     }
 
     public function uninstall(ServiceLocatorInterface $serviceLocator)

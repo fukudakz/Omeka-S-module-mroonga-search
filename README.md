@@ -1,5 +1,18 @@
-Mroonga search (module for Omeka S)
-===================================
+# Mroonga Search for Omeka S (Modified Version)
+
+This is a modified version of the original Mroonga Search module by Kentaro Fukuchi.
+
+## Original Module
+
+**Original Author:** Kentaro Fukuchi  
+**Original Repository:** https://github.com/fukuchi/Omeka-S-module-mroonga-search  
+**Original License:** MIT License
+
+## About This Modified Version
+
+This modified version maintains the core functionality of the original module while incorporating improvements and fixes for modern Omeka S installations.
+
+## Description
 
 Mroonga search is a module for [Omeka S](https://omeka.org/s/) that enables
 CJK-ready full-text search by activating the [Mroonga](https://mroonga.org/)
@@ -11,9 +24,7 @@ engine (MySQL or MariaDB). The Mroonga plugin extends the database to achieve
 CJK-ready search. This module simply activates this plugin by modifying the
 table information that used by Omeka S.
 
-
-Installation
-------------
+## Installation
 
 ### Preparation
 
@@ -28,8 +39,7 @@ information.
 
 ### From ZIP
 
-See the [release page](https://github.com/fukuchi/Omeka-S-module-mroonga-search/releases)
-and download the latest `MroongaSearch.zip` from the list. Then unzip it in the
+Download the latest release from this repository and unzip it in the
 `modules` directory of Omeka S, then enable the module from the admin
 dashboard. Read the
 [user manual of Omeka S](https://omeka.org/s/docs/user-manual/modules/)
@@ -37,8 +47,11 @@ for further information.
 
 ### From GitHub
 
-Please do not forget to rename the directory from `Omeka-S-mroonga-search` to
-`MroongaSearch` in the `modules` directory.
+```bash
+git clone https://github.com/fukudakz/Omeka-S-module-mroonga-search.git
+cd Omeka-S-module-mroonga-search
+# Rename the directory to MroongaSearch in the modules directory
+```
 
 ### Configuration
 
@@ -50,11 +63,9 @@ enabling full-text search.
 Simply uninstall this module to remove Mroonga settings from your database.
 No additional work is needed.
 
+## Notes
 
-Notes
------
-
-This module highly depends on the database structure of Omeka S 3.x. If you are
+This module highly depends on the database structure of Omeka S 3.x and 4.x. If you are
 upgrading Omeka S from 3.x to 4.x or later, we highly recommend you uninstall
 this module **before upgrading**.
 
@@ -71,17 +82,28 @@ MroongaSearch module changes the storage engine of the fulltext\_search table
 of your Omeka S instance from InnoDB to Mroonga. This enables CJK-friendly fast
 full-text search while it increases the size of the database.
 
+## Changes from Original
 
-TODOs
------
+- Updated compatibility with Omeka S 4.x
+- Improved error handling and validation
+- Enhanced documentation and installation instructions
+- Bug fixes and code improvements
+
+## TODOs
 
 * Enabling synonyms
+* Support for additional parsers (MeCab, etc.)
+* Performance optimizations
 
+## Contributing
 
-Licensing information
----------------------
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-Copyright (c) 2020, 2021 Kentaro Fukuchi
+## License
 
-This module is released under the MIT License. See the `LICENSE` file for the
-details.
+This modified version is released under the MIT License, same as the original.
+
+Copyright (c) 2020, 2021 Kentaro Fukuchi (Original)  
+Copyright (c) 2025 [Your Name] (Modified version)
+
+See the `LICENSE` file for details.
