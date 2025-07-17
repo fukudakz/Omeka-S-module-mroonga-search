@@ -56,20 +56,6 @@ class Module extends AbstractModule
 
         $this->checkMroongaPlugin($connection);
 
-        /*
-        $sm = $connection->getSchemaManager();
-        $fkeyName = $this->getForeignKeyName($sm, 'Installation');
-        $idxName = $this->getFulltextKeyName($sm, 'Installation');
-
-        $sql = "ALTER TABLE fulltext_search DROP FOREIGN KEY $fkeyName";
-        $result = $connection->executeQuery($sql);
-
-        $sql = "ALTER TABLE fulltext_search ENGINE = Mroonga COMMENT = 'engine \"InnoDB\"'";
-        $result = $connection->executeQuery($sql);
-
-        $sql = "ALTER TABLE fulltext_search ADD CONSTRAINT $fkeyName FOREIGN KEY ( `owner_id` ) REFERENCES `user` ( `id` ) ON DELETE SET NULL";
-        $result = $connection->executeQuery($sql);
-        */
     }
 
     public function uninstall(ServiceLocatorInterface $serviceLocator)
