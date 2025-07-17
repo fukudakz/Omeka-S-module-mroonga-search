@@ -10,19 +10,16 @@ This is a modified version of the original Mroonga Search module by Kentaro Fuku
 
 ## About This Modified Version
 
-This modified version maintains the core functionality of the original module while incorporating improvements and fixes for modern Omeka S installations.
+この修正版は、オリジナル版に少しの変更を加えたものです。Omeka S version 4系で実装できることを確認しています。
+This modified version maintains the core functionality of the original module while incorporating improvements and fixes for Omeka S v.4.X installations.
 
 ## Description
 
-Mroonga search is a module for [Omeka S](https://omeka.org/s/) that enables
-CJK-ready full-text search by activating the [Mroonga](https://mroonga.org/)
-plugin of MySQL or MariaDB.
+このモジュールは、Omeka S用のモジュールです。MySQLまたはMariaDBのMroongaプラグインを有効にすることで、CJK（日本語、中国語、韓国語）対応の全文検索を可能にします。
+This module is for [Omeka S](https://omeka.org/s/) that enables CJK-ready full-text search by activating the [Mroonga](https://mroonga.org/) plugin of MySQL or MariaDB.
 
-The default installation of the full-text search feature of the Omeka S is not
-CJK (Chinese, Japanese, Korean) ready because of the limitation of the database
-engine (MySQL or MariaDB). The Mroonga plugin extends the database to achieve
-CJK-ready search. This module simply activates this plugin by modifying the
-table information that used by Omeka S.
+Omeka Sに標準で搭載されている全文検索機能は、データベースエンジン（MySQLまたはMariaDB）の制約により、CJKに対応していません。Mroongaプラグインはデータベースを拡張し、CJK対応の検索を実現します。このモジュールは、Omeka Sが使用するテーブル情報を変更することで、このプラグインを有効化するだけのシンプルなものです。
+The default installation of the full-text search feature of the Omeka S is not CJK (Chinese, Japanese, Korean) ready because of the limitation of the database engine (MySQL or MariaDB). The Mroonga plugin extends the database to achieve CJK-ready search. This module simply activates this plugin by modifying the table information that used by Omeka S.
 
 ## Installation
 
