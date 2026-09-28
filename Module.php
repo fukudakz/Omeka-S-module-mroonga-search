@@ -36,16 +36,59 @@ namespace MroongaSearch;
 use Omeka\Module\AbstractModule;
 use Omeka\Module\Exception\ModuleCannotInstallException;
 use Omeka\Stdlib\Message;
-use Omeka\Mvc\Controller\Plugin\Messenger;
 use Doctrine\DBAL\Connection;
-use Doctrine\ORM\Query\ResultSetMapping;
+use Laminas\EventManager\SharedEventManagerInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Omeka\Api\Adapter\FulltextSearchableInterface;
 
 class Module extends AbstractModule
 {
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
+    }
+
+    /**
+     * Omeka コアの searchFulltext より先に実行し、fulltext_search を +2-gram 列へ変換する。
+     * 記号を含む語は MroongaSearchService 側で引用する。
+     */
+    public function attachListeners(SharedEventManagerInterface $sharedEventManager)
+    {
+        $sharedEventManager->attach(
+            '*',
+            'api.search.query',
+            [$this, 'onApiSearchQueryTransformFulltext'],
+            1000
+        );
+    }
+
+    public function onApiSearchQueryTransformFulltext($event)
+    {
+        $adapter = $event->getTarget();
+        if (!($adapter instanceof FulltextSearchableInterface)) {
+            return;
+        }
+
+        $services = $this->getServiceLocator();
+        if (!$services->has('MroongaSearch\Service\MroongaSearchService')) {
+            return;
+        }
+
+        $request = $event->getParam('request');
+        $content = $request->getContent();
+        if (!isset($content['fulltext_search']) || trim((string) $content['fulltext_search']) === '') {
+            return;
+        }
+
+        /** @var \MroongaSearch\MroongaSearchService $mroonga */
+        $mroonga = $services->get('MroongaSearch\Service\MroongaSearchService');
+        $transformed = $mroonga->buildBooleanBigramQuery((string) $content['fulltext_search']);
+        if ($transformed === '') {
+            return;
+        }
+
+        $content['fulltext_search'] = $transformed;
+        $request->setContent($content);
     }
 
     public function install(ServiceLocatorInterface $serviceLocator)
